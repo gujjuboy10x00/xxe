@@ -1,1 +1,2 @@
 <pre>\ntest\n&lt;img src=x onerror=prompt(123) /&gt;\n</pre>
+<pre>\ntest\n&lt;img src=x onerror=prompt(123) /&gt;\n</pre>
